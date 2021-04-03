@@ -15,13 +15,7 @@ namespace Traversal.PlayerDataProviders
 
             if (data == null)
             {
-                data = new AnimationData()
-                {
-                    Gesture = (byte)EPlayerGesture.NONE,
-                    HandcuffID = 0,
-                    ArresterID = 0,
-                    HandcuffStrength = 0
-                };
+                return true;
             }
 
             instance.SetValue("_gesture", (EPlayerGesture)data.Gesture);
