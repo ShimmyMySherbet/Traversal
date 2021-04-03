@@ -23,7 +23,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerAnimator))]
@@ -35,7 +35,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(PlayerClothing))]
@@ -47,7 +47,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerClothing))]
@@ -59,7 +59,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(PlayerInventory))]
@@ -71,7 +71,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerInventory))]
@@ -83,7 +83,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(PlayerLife))]
@@ -95,7 +95,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerLife))]
@@ -107,7 +107,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(Player))]
@@ -119,7 +119,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(Player))]
@@ -131,7 +131,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(PlayerQuests))]
@@ -143,7 +143,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerQuests))]
@@ -155,7 +155,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
         [Save(typeof(PlayerSkills))]
@@ -167,7 +167,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Save(__instance, Client);
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
         }
 
         [Load(typeof(PlayerSkills))]
@@ -179,7 +179,7 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return !prov.Load(__instance, Client);
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
     }
 }

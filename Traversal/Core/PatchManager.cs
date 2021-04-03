@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
+using Rocket.Core.Logging;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Attributes;
@@ -53,6 +54,40 @@ namespace Traversal.Core
             HarmonyInstance.UnpatchAll(Harmony_ID);
             Client?.Disconnect();
             IsEnabled = false;
+        }
+
+        public static bool RunPlayerDataProviderLoad<T>(IPlayerDataProvider<T> provider, T instance)
+        {
+            try
+            {
+                return !provider.Load(instance, Client);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"Failed to load player data from provider: {provider.GetType().Name}");
+                Logger.LogError($"Message: {ex.Message}");
+                Logger.LogError($"StackTrace: {ex.StackTrace}");
+                Logger.LogWarning($"Falling back on internal load for type {typeof(T).Name}");
+            }
+
+            return false;
+        }
+
+        public static bool RunPlayerDataProviderSave<T>(IPlayerDataProvider<T> provider, T instance)
+        {
+            try
+            {
+                return !provider.Save(instance, Client);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"Failed to save player data to provider: {provider.GetType().Name}");
+                Logger.LogError($"Message: {ex.Message}");
+                Logger.LogError($"StackTrace: {ex.StackTrace}");
+                Logger.LogWarning($"Falling back on internal save for type {typeof(T).Name}");
+            }
+
+            return false;
         }
 
         public static IPlayerDataProvider<T> GetDataProvider<T>()

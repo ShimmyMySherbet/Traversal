@@ -1,24 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SDG.Unturned;
+﻿using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
+using Traversal.Models.Databasing;
 
 namespace Traversal.PlayerDataProviders
 {
     public class ClothingPlayerDataProvider : IPlayerDataProvider<PlayerClothing>
     {
+        public const string TableName = "PlayerData_Clothing";
+
         public bool Load(PlayerClothing instance, MySQLEntityClient database)
         {
-            return false;
+            ClothingData data = database.QuerySingle<ClothingData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+
+            if (data == null)
+            {
+                return false;
+            }
+
+            var thirdClothes = instance.thirdClothes;
+
+            thirdClothes.visualShirt = instance.channel.owner.shirtItem;
+            thirdClothes.visualPants = instance.channel.owner.pantsItem;
+            thirdClothes.visualHat = instance.channel.owner.hatItem;
+            thirdClothes.visualBackpack = instance.channel.owner.backpackItem;
+            thirdClothes.visualVest = instance.channel.owner.vestItem;
+            thirdClothes.visualMask = instance.channel.owner.maskItem;
+            thirdClothes.visualGlasses = instance.channel.owner.glassesItem;
+
+            thirdClothes.shirt = data.ShirtID;
+            instance.shirtQuality = data.ShirtQuality;
+            instance.shirtState = data.ShirtState;
+
+            thirdClothes.pants = data.PantsID;
+            instance.pantsQuality = data.PantsQuality;
+            instance.pantsState = data.PantsState;
+
+            thirdClothes.hat = data.HatID;
+            instance.hatQuality = data.HatQuality;
+            instance.hatState = data.HatState;
+
+            thirdClothes.backpack = data.BackpackID;
+            instance.backpackQuality = data.BackpackQuality;
+            instance.backpackState = data.BackpackState;
+
+            thirdClothes.vest = data.VestID;
+            instance.vestQuality = data.VestQuality;
+            instance.vestState = data.VestState;
+
+            thirdClothes.mask = data.MaskID;
+            instance.maskQuality = data.MaskQuality;
+            instance.maskState = data.MaskState;
+
+            thirdClothes.glasses = data.GlassesID;
+            instance.glassesQuality = data.GlassesQuality;
+            instance.glassesState = data.GlassesState;
+
+            thirdClothes.isVisual = data.isVisible;
+
+            instance.SetValue("isSkinned", data.isSkinned);
+
+            thirdClothes.isMythic = data.isMythic;
+
+            thirdClothes.apply();
+
+            instance.SetValue("wasLoadCalled", true);
+
+            return true;
         }
 
         public bool Save(PlayerClothing instance, MySQLEntityClient database)
         {
-            return false;
+            var thirdClothes = instance.thirdClothes;
+            ClothingData data = new ClothingData()
+            {
+                BackpackID = thirdClothes.backpack,
+                GlassesID = thirdClothes.glasses,
+                HatID = thirdClothes.hat,
+                MaskID = thirdClothes.mask,
+                PantsID = thirdClothes.pants,
+                PlayerID = instance.channel.GetPlayerID(),
+                ServerID = Traversal.ServerID,
+                ShirtID = thirdClothes.shirt,
+                VestID = thirdClothes.vest,
+                BackpackQuality = instance.backpackQuality,
+                BackpackState = instance.backpackState,
+                GlassesQuality = instance.glassesQuality,
+                GlassesState = instance.glassesState,
+                HatQuality = instance.hatQuality,
+                HatState = instance.hatState,
+                isMythic = instance.isMythic,
+                isSkinned = instance.isSkinned,
+                isVisible = thirdClothes.isVisual,
+                MaskQuality = instance.maskQuality,
+                MaskState = instance.maskState,
+                PantsQuality = instance.pantsQuality,
+                PantsState = instance.pantsState,
+                ShirtQuality = instance.shirtQuality,
+                ShirtState = instance.shirtState,
+                Slot = instance.channel.GetPlayerSlotID(),
+                VestQuality = instance.vestQuality,
+                VestState = instance.vestState
+            };
+            database.InsertUpdate(data, TableName);
+
+            return true;
         }
     }
 }
