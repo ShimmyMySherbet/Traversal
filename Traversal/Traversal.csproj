@@ -134,6 +134,10 @@
     <Compile Include="Models\Attributes\Save.cs" />
     <Compile Include="Models\Databasing\AnimationData.cs" />
     <Compile Include="Models\Databasing\ClothingData.cs" />
+    <Compile Include="Models\Databasing\InventoryContent.cs" />
+    <Compile Include="Models\Databasing\InventoryData.cs" />
+    <Compile Include="Models\Databasing\InventoryItem.cs" />
+    <Compile Include="Models\Databasing\InventoryPage.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />
