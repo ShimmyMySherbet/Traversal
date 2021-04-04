@@ -9,6 +9,14 @@ namespace Traversal.PlayerDataProviders
     {
         public const string TableName = "PlayerData_Life";
 
+        public void CheckSchema(MySQLEntityClient client)
+        {
+            if (!client.TableExists(TableName))
+            {
+                client.CreateTable<LifeData>(TableName);
+            }
+        }
+
         public bool Load(PlayerLife instance, MySQLEntityClient database)
         {
             LifeData data = database.QuerySingle<LifeData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);

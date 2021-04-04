@@ -10,6 +10,14 @@ namespace Traversal.PlayerDataProviders
     {
         public const string TableName = "PlayerData_Inventory";
 
+        public void CheckSchema(MySQLEntityClient client)
+        {
+            if (!client.TableExists(TableName))
+            {
+                client.CreateTable<InventoryData>(TableName);
+            }
+        }
+
         public bool Load(PlayerInventory instance, MySQLEntityClient database)
         {
             InventoryData data = database.QuerySingle<InventoryData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
@@ -17,6 +25,7 @@ namespace Traversal.PlayerDataProviders
             {
                 return false;
             }
+            data.Load();
             Items[] items = instance.items;
             var loadPages = data.Content.Pages;
             for (byte page = 0; page < 7; page++)
@@ -75,7 +84,7 @@ namespace Traversal.PlayerDataProviders
 
                 data.Content.Pages.Add(outPage);
             }
-
+            data.Save();
             database.InsertUpdate(data, TableName);
             return true;
         }

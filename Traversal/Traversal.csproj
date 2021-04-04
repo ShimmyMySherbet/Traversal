@@ -75,7 +75,8 @@
       <HintPath>Libs\Rocket.Unturned.dll</HintPath>
     </Reference>
     <Reference Include="ShimmyMySherbet.MySQL.EF, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ShimmyMySherbet.MySQL.EF.1.2.0\lib\netstandard2.0\ShimmyMySherbet.MySQL.EF.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MySQLEntityFramework\ShimmyMySherbet.MySQLEntityFramework\bin\Debug\netstandard2.0\ShimmyMySherbet.MySQL.EF.dll</HintPath>
     </Reference>
     <Reference Include="Steamworks.NET">
       <HintPath>Libs\Steamworks.NET.dll</HintPath>
@@ -132,6 +133,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
     <Compile Include="Models\Attributes\Save.cs" />
+    <Compile Include="Models\Attributes\Target.cs" />
     <Compile Include="Models\Databasing\AnimationData.cs" />
     <Compile Include="Models\Databasing\ClothingData.cs" />
     <Compile Include="Models\Databasing\InventoryContent.cs" />
@@ -139,10 +141,14 @@
     <Compile Include="Models\Databasing\InventoryItem.cs" />
     <Compile Include="Models\Databasing\InventoryPage.cs" />
     <Compile Include="Models\Databasing\LifeData.cs" />
+    <Compile Include="Models\Databasing\PositionData.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />
     <Compile Include="Models\PlayerDataModel.cs" />
+    <Compile Include="Models\Proxies\PlayerSpawnProxy.cs" />
+    <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
+    <Compile Include="Models\TraversalConfig.cs" />
     <Compile Include="PlayerDataProviders\AnimationDataProvider.cs" />
     <Compile Include="PlayerDataProviders\ClothingPlayerDataProvider.cs" />
     <Compile Include="PlayerDataProviders\InventoryDataProvider.cs" />
@@ -155,7 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Libs\Assembly-CSharp-firstpass.dll" />
     <None Include="Libs\Assembly-CSharp.dll" />
     <None Include="Libs\Rocket.API.dll" />
     <None Include="Libs\Rocket.Core.dll" />

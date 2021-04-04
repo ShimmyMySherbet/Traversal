@@ -1,4 +1,5 @@
-﻿using SDG.Unturned;
+﻿using Rocket.Core.Logging;
+using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
@@ -8,6 +9,14 @@ namespace Traversal.PlayerDataProviders
     public class ClothingPlayerDataProvider : IPlayerDataProvider<PlayerClothing>
     {
         public const string TableName = "PlayerData_Clothing";
+
+        public void CheckSchema(MySQLEntityClient client)
+        {
+            if (!client.TableExists(TableName))
+            {
+                client.CreateTable<ClothingData>(TableName);
+            }
+        }
 
         public bool Load(PlayerClothing instance, MySQLEntityClient database)
         {
@@ -102,7 +111,19 @@ namespace Traversal.PlayerDataProviders
                 VestQuality = instance.vestQuality,
                 VestState = instance.vestState
             };
-            database.InsertUpdate(data, TableName);
+            UnturnedLog.info("Store item", data);
+            try
+            {
+                Logger.Log("Try insert update...");
+
+
+                database.InsertUpdate(data, TableName);
+
+            }
+            catch (System.Exception ex)
+            {
+                CommandWindow.LogErrorFormat("[{source}] Error Insert Updating: {Error}", "Traversal", ex);
+            }
 
             return true;
         }

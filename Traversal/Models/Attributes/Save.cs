@@ -10,5 +10,6 @@ namespace Traversal.Models.Attributes
     {
         public Type Type;
         public Save(Type target) => Type = target;
+        public Save() => Type = null;
     }
 }

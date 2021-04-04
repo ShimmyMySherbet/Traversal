@@ -10,6 +10,7 @@ namespace Traversal.Models.Attributes
     {
         public Type Type;
         public Load(Type target) => Type = target;
+        public Load() => Type = null;
 
     }
 }

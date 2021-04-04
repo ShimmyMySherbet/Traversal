@@ -9,6 +9,14 @@ namespace Traversal.PlayerDataProviders
     {
         public const string TableName = "PlayerData_Animation";
 
+        public void CheckSchema(MySQLEntityClient client)
+        {
+            if (!client.TableExists(TableName))
+            {
+                client.CreateTable<AnimationData>(TableName);
+            }
+        }
+
         public bool Load(PlayerAnimator instance, MySQLEntityClient database)
         {
             AnimationData data = database.QuerySingle<AnimationData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);

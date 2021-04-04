@@ -13,6 +13,13 @@ namespace Traversal.PlayerDataProviders
     {
         public const string TableName = "PlayerData_Quests";
 
+        public void CheckSchema(MySQLEntityClient client)
+        {
+            if (!client.TableExists(TableName))
+            {
+            }
+        }
+
         public bool Load(PlayerQuests instance, MySQLEntityClient database)
         {
             return false;

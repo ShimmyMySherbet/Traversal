@@ -11,6 +11,10 @@ namespace Traversal.PlayerDataProviders
 {
     public class SkillDataProvider : IPlayerDataProvider<PlayerSkills>
     {
+        public void CheckSchema(MySQLEntityClient client)
+        {
+        }
+
         public bool Load(PlayerSkills instance, MySQLEntityClient database)
         {
             return false;

@@ -7,7 +7,6 @@ namespace Traversal.Models
         [SQLPrimaryKey]
         public ulong PlayerID;
 
-        [SQLIndex]
         public byte Slot;
 
         public int ServerID;
