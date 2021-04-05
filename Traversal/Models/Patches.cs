@@ -67,29 +67,29 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
-        //[Save(typeof(PlayerInventory))]
-        //public static bool Inventory_Save(PlayerInventory __instance)
-        //{
-        //    var prov = GetDataProvider<PlayerInventory>();
+        [Save(typeof(PlayerInventory))]
+        public static bool Inventory_Save(PlayerInventory __instance)
+        {
+            var prov = GetDataProvider<PlayerInventory>();
 
-        //    if (prov == null)
-        //    {
-        //        return true;
-        //    }
-        //    return PatchManager.RunPlayerDataProviderSave(prov, __instance);
-        //}
+            if (prov == null)
+            {
+                return true;
+            }
+            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
+        }
 
-        //[Load(typeof(PlayerInventory))]
-        //public static bool Inventory_Load(PlayerInventory __instance)
-        //{
-        //    var prov = GetDataProvider<PlayerInventory>();
+        [Load(typeof(PlayerInventory))]
+        public static bool Inventory_Load(PlayerInventory __instance)
+        {
+            var prov = GetDataProvider<PlayerInventory>();
 
-        //    if (prov == null)
-        //    {
-        //        return true;
-        //    }
-        //    return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
-        //}
+            if (prov == null)
+            {
+                return true;
+            }
+            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
+        }
 
         [Save(typeof(PlayerLife))]
         public static bool Life_Save(PlayerLife __instance)
