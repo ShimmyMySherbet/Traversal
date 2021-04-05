@@ -136,12 +136,15 @@
     <Compile Include="Models\Attributes\Target.cs" />
     <Compile Include="Models\Databasing\AnimationData.cs" />
     <Compile Include="Models\Databasing\ClothingData.cs" />
+    <Compile Include="Models\Databasing\InnerQuestData.cs" />
     <Compile Include="Models\Databasing\InventoryContent.cs" />
     <Compile Include="Models\Databasing\InventoryData.cs" />
     <Compile Include="Models\Databasing\InventoryItem.cs" />
     <Compile Include="Models\Databasing\InventoryPage.cs" />
     <Compile Include="Models\Databasing\LifeData.cs" />
     <Compile Include="Models\Databasing\PositionData.cs" />
+    <Compile Include="Models\Databasing\QuestData.cs" />
+    <Compile Include="Models\Databasing\QuestFlag.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
+using Traversal.Models.Databasing;
 
 namespace Traversal.PlayerDataProviders
 {
@@ -17,6 +18,7 @@ namespace Traversal.PlayerDataProviders
         {
             if (!client.TableExists(TableName))
             {
+                client.CreateTable<QuestData>(TableName);
             }
         }
 

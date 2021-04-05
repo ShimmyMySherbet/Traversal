@@ -111,19 +111,7 @@ namespace Traversal.PlayerDataProviders
                 VestQuality = instance.vestQuality,
                 VestState = instance.vestState
             };
-            UnturnedLog.info("Store item", data);
-            try
-            {
-                Logger.Log("Try insert update...");
-
-
                 database.InsertUpdate(data, TableName);
-
-            }
-            catch (System.Exception ex)
-            {
-                CommandWindow.LogErrorFormat("[{source}] Error Insert Updating: {Error}", "Traversal", ex);
-            }
 
             return true;
         }
