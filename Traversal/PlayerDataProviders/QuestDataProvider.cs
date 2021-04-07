@@ -64,6 +64,8 @@ namespace Traversal.PlayerDataProviders
             instance.SetValue("questsList", questList);
             instance.SetValue("TrackedQuestID", data.ActiveQuest);
 
+            instance.SetValue("wasLoadCalled", true);
+
             return true;
         }
 

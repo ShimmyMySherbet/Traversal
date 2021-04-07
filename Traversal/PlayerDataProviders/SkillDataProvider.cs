@@ -38,6 +38,8 @@ namespace Traversal.PlayerDataProviders
 
             instance.InvokeTarget("applyDefaultSkills");
 
+            instance.SetValue("wasLoadCalled", true);
+
             return true;
         }
 

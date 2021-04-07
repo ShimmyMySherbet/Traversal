@@ -30,6 +30,8 @@ namespace Traversal.PlayerDataProviders
             instance.captorID = new Steamworks.CSteamID(data.ArresterID);
             instance.captorItem = data.HandcuffID;
             instance.captorStrength = data.HandcuffStrength;
+
+            instance.SetValue("wasLoadCalled", true);
             return true;
         }
 
