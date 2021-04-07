@@ -87,6 +87,9 @@ namespace Traversal.PlayerDataProviders
             var quests = instance.GetValue<List<PlayerQuest>>("questsList");
             var flags = instance.GetValue<List<PlayerQuestFlag>>("flagsList");
 
+            if (quests == null) quests = new List<PlayerQuest>();
+            if (flags == null) flags = new List<PlayerQuestFlag>();
+
             data.Flags = flags.Select(x => new QuestFlag() { Flag = x.id, Value = x.value }).ToList();
             data.ActiveQuests = quests.Select(x => x.id).ToList();
 
