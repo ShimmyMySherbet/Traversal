@@ -11,6 +11,10 @@ namespace Traversal.PlayerDataProviders
 
         public void CheckSchema(MySQLEntityClient client)
         {
+            if (!client.TableExists(TableName))
+            {
+                client.CreateTable<SkillData>(TableName);
+            }
         }
 
         public bool Load(PlayerSkills instance, MySQLEntityClient database)
