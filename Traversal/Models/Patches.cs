@@ -133,7 +133,7 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderSave(prov, proxy);
         }
 
-        [Load, Target(typeof(Provider), "loadPlayerSpawn"), Disabled]
+        [Load, Target(typeof(Provider), "loadPlayerSpawn")]
         public static bool Player_Load(SteamPlayerID playerID, out Vector3 point, out byte angle, out EPlayerStance initialStance)
         {
             point = Vector3.zero;
