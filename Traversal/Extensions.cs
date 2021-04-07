@@ -49,8 +49,14 @@ namespace Traversal
 
             if (pro != null)
             {
+                if (!pro.CanWrite)
+                {
+                    throw new TraversalTargetNotFoundException($"Property '{propertyName}' does not support writing");
+                }
                 pro.SetValue(obj, value);
+                return;
             }
+
             throw new TraversalTargetNotFoundException($"Set Property/Field '{propertyName}' not found.");
         }
 
@@ -62,6 +68,7 @@ namespace Traversal
             if (m != null)
             {
                 m.Invoke(obj, param);
+                return;
             }
             throw new TraversalTargetNotFoundException($"Method '{methodName}' not found.");
         }

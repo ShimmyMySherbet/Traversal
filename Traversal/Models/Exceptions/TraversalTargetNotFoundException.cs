@@ -8,7 +8,6 @@ namespace Traversal.Models.Exceptions
 
         public override string Message => msg;
 
-
         public TraversalTargetNotFoundException(string message) => msg = message;
     }
 }
