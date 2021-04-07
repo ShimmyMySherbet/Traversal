@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Traversal.PlayerDataProviders
 {
-    public class PlayerDataProvider : IPlayerDataProvider<PlayerSpawnProxy>
+    public class PlayerDataProvider : IPlayerDataProvider<PlayerProxy>
     {
         public const string TableName = "PlayerData_Animation";
 
@@ -20,14 +20,13 @@ namespace Traversal.PlayerDataProviders
             }
         }
 
-
         /// <summary>
         /// Mimics Unturned's internal spawn code
         /// Janky as hell, but it's the only way to achieve this.
         /// </summary>
-        public bool Load(PlayerSpawnProxy instance, MySQLEntityClient database)
+        public bool Load(PlayerProxy instance, MySQLEntityClient database)
         {
-            PositionData data = database.QuerySingle<PositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.playerID, instance.SlotID, Traversal.ServerID);
+            PositionData data = database.QuerySingle<PositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID);
 
             Vector3 point = Vector3.zero;
             byte angle = 0;
@@ -59,7 +58,7 @@ namespace Traversal.PlayerDataProviders
                 if (Provider.onLoginSpawning != null)
                 {
                     float num = (float)(angle * 2);
-                    Provider.onLoginSpawning(instance.playerID, ref point, ref num, ref initialStance, ref flag);
+                    Provider.onLoginSpawning(instance.SteamID, ref point, ref num, ref initialStance, ref flag);
                     angle = (byte)(num / 2f);
                 }
             }
@@ -79,23 +78,22 @@ namespace Traversal.PlayerDataProviders
             return true;
         }
 
-        public bool Save(PlayerSpawnProxy instance, MySQLEntityClient database)
+        public bool Save(PlayerProxy instance, MySQLEntityClient database)
         {
-
             PositionData data = new PositionData()
             {
-                IsDead = instance.player.life.isDead,
+                IsDead = instance.Player.life.isDead,
                 PlayerID = instance.PlayerID,
                 ServerID = Traversal.ServerID,
-                Rot = instance.player.look.rot,
-                Slot = instance.SlotID,
-                X = instance.player.transform.position.x,
-                Y = instance.player.transform.position.y,
-                Z = instance.player.transform.position.z
+                Rot = instance.Player.look.rot,
+                Slot = instance.PlayerSlot,
+                X = instance.Player.transform.position.x,
+                Y = instance.Player.transform.position.y,
+                Z = instance.Player.transform.position.z
             };
 
             database.InsertUpdate(data, TableName);
-            return true;
+            return false;
         }
     }
 }

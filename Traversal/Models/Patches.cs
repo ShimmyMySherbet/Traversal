@@ -1,7 +1,4 @@
-﻿using System.Management.Instrumentation;
-using System.Reflection;
-using Renci.SshNet;
-using SDG.Unturned;
+﻿using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Core;
 using Traversal.Models.Attributes;
@@ -115,51 +112,59 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
-        //[Save, Target(typeof(Player), "savePositionAndRotation")]
-        //public static bool Player_Save(Player __instance)
-        //{
-        //    var prov = GetDataProvider<PlayerSpawnProxy>();
+        [Save, Target(typeof(Player), "savePositionAndRotation")]
+        public static bool Player_Save(Player __instance)
+        {
+            var prov = GetDataProvider<PlayerProxy>();
 
-        //    if (prov == null)
-        //    {
-        //        return true;
-        //    }
+            if (prov == null)
+            {
+                return true;
+            }
 
-        //    PlayerSpawnProxy proxy = new PlayerSpawnProxy();
-        //    proxy.MODE = PlayerSpawnProxy.MODE_SAVE;
-        //    proxy.player = __instance;
+            PlayerProxy proxy = new PlayerProxy()
+            {
+                PlayerID = __instance.channel.GetPlayerID(),
+                PlayerSlot = __instance.channel.GetPlayerSlotID(),
+                SteamID = __instance.channel.owner.playerID,
+                Player = __instance
+            };
 
-        //    return PatchManager.RunPlayerDataProviderSave(prov, proxy);
-        //}
+            return PatchManager.RunPlayerDataProviderSave(prov, proxy);
+        }
 
-        //[Load, Target(typeof(Provider), "loadPlayerSpawn")]
-        //public static bool Player_Load(SteamPlayerID playerID, out Vector3 point, out byte angle, out EPlayerStance initialStance)
-        //{
-        //    point = Vector3.zero;
-        //    angle = 0;
-        //    initialStance = EPlayerStance.STAND;
+        [Load, Target(typeof(Provider), "loadPlayerSpawn")]
+        public static bool Player_Load(SteamPlayerID playerID, out Vector3 point, out byte angle, out EPlayerStance initialStance)
+        {
+            point = Vector3.zero;
+            angle = 0;
+            initialStance = EPlayerStance.STAND;
 
-        //    var prov = GetDataProvider<PlayerSpawnProxy>();
+            var prov = GetDataProvider<PlayerProxy>();
 
-        //    if (prov == null)
-        //    {
-        //        return true;
-        //    }
-        //    PlayerSpawnProxy proxy = new PlayerSpawnProxy();
-        //    proxy.MODE = PlayerSpawnProxy.MODE_LOAD;
-        //    proxy.playerID = playerID;
+            if (prov == null)
+            {
+                return true;
+            }
 
-        //    bool retval = PatchManager.RunPlayerDataProviderLoad(prov, proxy);
-        //    if (retval)
-        //    {
-        //        return true;
-        //    }
+            PlayerProxy proxy = new PlayerProxy()
+            {
+                PlayerID = playerID.steamID.m_SteamID,
+                PlayerSlot = playerID.characterID,
+                SteamID = playerID,
+                Player = null
+            };
 
-        //    point = proxy.Result.Point;
-        //    angle = proxy.Result.Angle;
-        //    initialStance = proxy.Result.Stance;
-        //    return false;
-        //}
+            if (!PatchManager.RunPlayerDataProviderLoad(prov, proxy))
+            {
+                point = proxy.Result.Point;
+                angle = proxy.Result.Angle;
+                initialStance = proxy.Result.Stance;
+                return true;
+            }
+
+            return false;
+        }
 
         [Save(typeof(PlayerQuests))]
         public static bool Quests_Save(PlayerQuests __instance)

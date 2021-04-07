@@ -148,11 +148,12 @@
     <Compile Include="Models\Databasing\QuestData.cs" />
     <Compile Include="Models\Databasing\QuestFlag.cs" />
     <Compile Include="Models\Databasing\SkillData.cs" />
+    <Compile Include="Models\IModelProxy.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />
     <Compile Include="Models\PlayerDataModel.cs" />
-    <Compile Include="Models\Proxies\PlayerSpawnProxy.cs" />
+    <Compile Include="Models\Proxies\PlayerProxy.cs" />
     <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
     <Compile Include="Models\TraversalConfig.cs" />
     <Compile Include="PlayerDataProviders\AnimationDataProvider.cs" />
