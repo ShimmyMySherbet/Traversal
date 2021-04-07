@@ -74,9 +74,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Rocket.Unturned.dll</HintPath>
     </Reference>
-    <Reference Include="ShimmyMySherbet.MySQL.EF, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MySQLEntityFramework\ShimmyMySherbet.MySQLEntityFramework\bin\Debug\netstandard2.0\ShimmyMySherbet.MySQL.EF.dll</HintPath>
+    <Reference Include="ShimmyMySherbet.MySQL.EF, Version=1.2.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShimmyMySherbet.MySQL.EF.1.2.5\lib\netstandard2.0\ShimmyMySherbet.MySQL.EF.dll</HintPath>
     </Reference>
     <Reference Include="Steamworks.NET">
       <HintPath>Libs\Steamworks.NET.dll</HintPath>
