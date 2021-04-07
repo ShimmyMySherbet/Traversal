@@ -9,7 +9,7 @@ namespace Traversal.Models.Databasing
         public float MarkerX;
         public float MarkerY;
         public float MarkerZ;
-        public float RadioFrequency;
+        public uint RadioFrequency;
         public ulong GroupID;
         public byte GroupRank;
         public bool IsMainGroup;
