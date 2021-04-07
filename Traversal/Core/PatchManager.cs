@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using HarmonyLib;
 using Rocket.Core.Logging;
 using ShimmyMySherbet.MySQL.EF.Core;
@@ -29,6 +28,8 @@ namespace Traversal.Core
 
             foreach (MethodInfo method in typeof(Patches).GetMethods(BindingFlags.Public | BindingFlags.Static))
             {
+                if (Attribute.IsDefined(method, typeof(Disabled))) continue;
+
                 if (Attribute.IsDefined(method, typeof(Save)))
                 {
                     Save s = (Save)Attribute.GetCustomAttribute(method, typeof(Save));
@@ -90,7 +91,6 @@ namespace Traversal.Core
                 if (ex.InnerException == null)
                 {
                     Logger.LogWarning("No inner error.");
-
                 }
                 else
                 {
@@ -120,8 +120,8 @@ namespace Traversal.Core
                 if (ex.InnerException == null)
                 {
                     Logger.LogWarning("No inner error.");
-
-                } else
+                }
+                else
                 {
                     Logger.LogError($"Inner: {ex.InnerException.Message}");
                 }
@@ -134,7 +134,6 @@ namespace Traversal.Core
 
         public static IPlayerDataProvider<T> GetDataProvider<T>()
         {
-
             if (!IsEnabled) return null;
             Logger.Log($"Looking for provider type for {typeof(T).Name}");
             Type t = typeof(IPlayerDataProvider<T>);
@@ -159,7 +158,8 @@ namespace Traversal.Core
                     Logger.Log($"Checking schema for provider: {prov.GetType().Name}");
                     prov.CheckSchema(Client);
                     return prov;
-                } else
+                }
+                else
                 {
                     Console.WriteLine($"Something went wrong! @ {instance.GetType().Name}");
                 }

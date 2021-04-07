@@ -36,6 +36,8 @@ namespace Traversal.PlayerDataProviders
                 instance.skills[skill.Category][skill.ID].level = skill.Value;
             }
 
+            instance.InvokeTarget("applyDefaultSkills");
+
             return true;
         }
 

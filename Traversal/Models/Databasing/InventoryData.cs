@@ -10,7 +10,7 @@ namespace Traversal.Models.Databasing
 {
     public class InventoryData : PlayerDataModel
     {
-        [JsonIgnore]
+        [SQLIgnore]
         public InventoryContent Content;
 
         [SQLPropertyName("Content")]

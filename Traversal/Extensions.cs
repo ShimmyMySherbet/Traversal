@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using Org.BouncyCastle.Asn1;
 using SDG.Unturned;
-using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Models.Exceptions;
 
 namespace Traversal
 {
@@ -34,7 +33,7 @@ namespace Traversal
                 }
                 throw new InvalidCastException();
             }
-            throw new Exception("Property/Field not found.");
+            throw new TraversalTargetNotFoundException($"Get Property/Field '{propertyName}' not found.");
         }
 
         public static void SetValue<T>(this object obj, string propertyName, T value)
@@ -52,7 +51,43 @@ namespace Traversal
             {
                 pro.SetValue(obj, value);
             }
-            throw new Exception("Property/Field not found.");
+            throw new TraversalTargetNotFoundException($"Set Property/Field '{propertyName}' not found.");
+        }
+
+        public static void InvokeTarget(this object obj, string methodName, params object[] param)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            MethodInfo m = obj.GetType().GetMethod(methodName, Flags_All);
+            if (m != null)
+            {
+                m.Invoke(obj, param);
+            }
+            throw new TraversalTargetNotFoundException($"Method '{methodName}' not found.");
+        }
+
+        public static T InvokeTarget<T>(this object obj, string methodName, params object[] param)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            MethodInfo m = obj.GetType().GetMethod(methodName, Flags_All);
+
+            if (m != null)
+            {
+                if (!typeof(T).IsAssignableFrom(m.ReturnType))
+                {
+                    throw new TraversalBadCastException($"Cannot cast from type {m.ReturnType.Name} to {typeof(T).Name} at method {methodName}");
+                }
+
+                var o = m.Invoke(obj, param);
+                if (o == null) return default(T);
+                if (o is T t)
+                {
+                    return t;
+                }
+                throw new TraversalBadCastException($"Cannot cast from type {o.GetType().Name} to {typeof(T).Name} at method {methodName}");
+            }
+            throw new TraversalTargetNotFoundException($"Method '{methodName}' not found.");
         }
 
         public static ulong GetPlayerID(this SteamChannel channel)

@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Models\Attributes\Disabled.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
     <Compile Include="Models\Attributes\Save.cs" />
     <Compile Include="Models\Attributes\Target.cs" />
@@ -148,6 +149,8 @@
     <Compile Include="Models\Databasing\QuestData.cs" />
     <Compile Include="Models\Databasing\QuestFlag.cs" />
     <Compile Include="Models\Databasing\SkillData.cs" />
+    <Compile Include="Models\Exceptions\TraversalBadCastException.cs" />
+    <Compile Include="Models\Exceptions\TraversalTargetNotFoundException.cs" />
     <Compile Include="Models\IModelProxy.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />

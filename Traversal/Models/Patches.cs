@@ -112,7 +112,7 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
-        [Save, Target(typeof(Player), "savePositionAndRotation")]
+        [Save, Target(typeof(Player), "savePositionAndRotation"), Disabled]
         public static bool Player_Save(Player __instance)
         {
             var prov = GetDataProvider<PlayerProxy>();
@@ -133,7 +133,7 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderSave(prov, proxy);
         }
 
-        [Load, Target(typeof(Provider), "loadPlayerSpawn")]
+        [Load, Target(typeof(Provider), "loadPlayerSpawn"), Disabled]
         public static bool Player_Load(SteamPlayerID playerID, out Vector3 point, out byte angle, out EPlayerStance initialStance)
         {
             point = Vector3.zero;
