@@ -29,7 +29,7 @@ namespace Traversal.Models.Databasing
             set => InnerData.ActiveQuests = value;
         }
 
-        [SQLIgnore] public InnerQuestData InnerData;
+        [SQLIgnore] public InnerQuestData InnerData = new InnerQuestData();
 
         [SQLPropertyName("Data")] public string FlagValue;
 

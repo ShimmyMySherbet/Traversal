@@ -69,6 +69,8 @@ namespace Traversal.PlayerDataProviders
 
         public bool Save(PlayerQuests instance, MySQLEntityClient database)
         {
+            System.Console.WriteLine("makeOBJ...");
+
             QuestData data = new QuestData()
             {
                 GroupID = instance.groupID.m_SteamID,
@@ -83,16 +85,16 @@ namespace Traversal.PlayerDataProviders
                 MarkerZ = instance.markerPosition.z,
                 RadioFrequency = instance.radioFrequency
             };
-
             var quests = instance.GetValue<List<PlayerQuest>>("questsList");
             var flags = instance.GetValue<List<PlayerQuestFlag>>("flagsList");
 
             if (quests == null) quests = new List<PlayerQuest>();
             if (flags == null) flags = new List<PlayerQuestFlag>();
 
-            data.Flags = flags.Select(x => new QuestFlag() { Flag = x.id, Value = x.value }).ToList();
-            data.ActiveQuests = quests.Select(x => x.id).ToList();
+            data.Flags = flags.Where(x => x != null).Select(x => new QuestFlag() { Flag = x.id, Value = x.value }).ToList();
+            data.ActiveQuests = quests.Where(x => x != null).Select(x => x.id).ToList();
 
+            data.Save();
             database.InsertUpdate(data, TableName);
             return true;
         }
