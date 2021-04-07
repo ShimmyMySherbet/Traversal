@@ -4,8 +4,11 @@ namespace Traversal.Models.Exceptions
 {
     public sealed class TraversalTargetNotFoundException : Exception
     {
-        public new string Message { get; set; }
+        private string msg;
 
-        public TraversalTargetNotFoundException(string message) => Message = message;
+        public override string Message => msg;
+
+
+        public TraversalTargetNotFoundException(string message) => msg = message;
     }
 }

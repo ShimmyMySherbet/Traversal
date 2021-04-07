@@ -8,8 +8,11 @@ namespace Traversal.Models.Exceptions
 {
     public sealed class TraversalBadCastException : Exception
     {
-        public new string Message { get; set; }
+        private string msg;
 
-        public TraversalBadCastException(string message) => Message = message;
+        public override string Message => msg;
+
+
+        public TraversalBadCastException(string message) => msg = message;
     }
 }
