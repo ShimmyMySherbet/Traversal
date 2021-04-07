@@ -13,5 +13,6 @@ namespace Traversal.Models.Databasing
         public float Y;
         public float Z;
         public byte Rot;
+        public byte Stance;
     }
 }

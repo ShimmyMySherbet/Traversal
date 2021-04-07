@@ -160,10 +160,9 @@ namespace Traversal.Models
                 point = proxy.Result.Point;
                 angle = proxy.Result.Angle;
                 initialStance = proxy.Result.Stance;
-                return true;
+                return false;
             }
-
-            return false;
+            return true;
         }
 
         [Save(typeof(PlayerQuests))]

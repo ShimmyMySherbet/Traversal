@@ -34,6 +34,7 @@ namespace Traversal.PlayerDataProviders
             bool flag = false;
             if (data != null && !data.IsDead && Level.info.type == ELevelType.SURVIVAL)
             {
+                initialStance = (EPlayerStance)data.Stance;
                 point = new Vector3(data.X, data.Y, data.Z) + new Vector3(0f, 0.01f, 0f);
                 angle = data.Rot;
                 if (!point.IsFinite())
@@ -73,7 +74,6 @@ namespace Traversal.PlayerDataProviders
                 point = spawn.point + new Vector3(0f, 0.5f, 0f);
                 angle = (byte)(spawn.angle / 2f);
             }
-
             instance.Result = new SpawnProxyResult(point, angle, initialStance);
             return true;
         }
@@ -89,11 +89,11 @@ namespace Traversal.PlayerDataProviders
                 Slot = instance.PlayerSlot,
                 X = instance.Player.transform.position.x,
                 Y = instance.Player.transform.position.y,
-                Z = instance.Player.transform.position.z
+                Z = instance.Player.transform.position.z,
+                Stance = (byte)instance.Player.stance.stance
             };
-
             database.InsertUpdate(data, TableName);
-            return false;
+            return true;
         }
     }
 }
