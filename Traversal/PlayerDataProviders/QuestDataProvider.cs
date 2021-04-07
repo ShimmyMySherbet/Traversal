@@ -69,8 +69,6 @@ namespace Traversal.PlayerDataProviders
 
         public bool Save(PlayerQuests instance, MySQLEntityClient database)
         {
-            System.Console.WriteLine("makeOBJ...");
-
             QuestData data = new QuestData()
             {
                 GroupID = instance.groupID.m_SteamID,
