@@ -112,7 +112,7 @@ namespace Traversal.Models
             return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
         }
 
-        [Save, Target(typeof(Player), "savePositionAndRotation"), Disabled]
+        [Save, Target(typeof(Player), "savePositionAndRotation")]
         public static bool Player_Save(Player __instance)
         {
             var prov = GetDataProvider<PlayerProxy>();
