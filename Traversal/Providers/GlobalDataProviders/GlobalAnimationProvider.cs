@@ -8,7 +8,7 @@ namespace Traversal.Providers.GlobalDataProviders
 {
     public class GlobalAnimationProvider : IGlobalDataProvider<PlayerAnimationData>
     {
-        public const string TableName = "PlayerData_Animation_Global";
+        public const string TableName = "TraversalData_Animation_Global";
 
         public string Name => "Animation";
 

@@ -7,7 +7,7 @@ namespace Traversal.Providers.GlobalDataProviders
 {
     public class GlobalInventoryProvider : IGlobalDataProvider<PlayerInventoryData>
     {
-        public const string TableName = "PlayerData_Inventory_Global";
+        public const string TableName = "TraversalData_Inventory_Global";
 
         public string Name => "Inventory";
 

@@ -8,7 +8,7 @@ namespace Traversal.Providers.PlayerDataProviders
 {
     public class LifeDataProvider : IPlayerDataProvider<PlayerLife>
     {
-        public const string TableName = "PlayerData_Life";
+        public const string TableName = "TraversalData_Life";
 
         public void CheckSchema(MySQLEntityClient client)
         {

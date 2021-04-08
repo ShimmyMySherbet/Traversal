@@ -8,7 +8,7 @@ namespace Traversal.PlayerDataProviders
 {
     public class SkillDataProvider : IPlayerDataProvider<PlayerSkills>
     {
-        public const string TableName = "PlayerData_Skills";
+        public const string TableName = "TraversalData_Skills";
 
         public void CheckSchema(MySQLEntityClient client)
         {

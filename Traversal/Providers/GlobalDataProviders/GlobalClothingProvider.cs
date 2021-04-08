@@ -7,7 +7,7 @@ namespace Traversal.Providers.GlobalDataProviders
 {
     public class GlobalClothingProvider : IGlobalDataProvider<PlayerClothingData>
     {
-        public const string TableName = "PlayerData_Clothing_Global";
+        public const string TableName = "TraversalData_Clothing_Global";
 
         public string Name => "Clothing";
 

@@ -12,7 +12,7 @@ namespace Traversal.PlayerDataProviders
 {
     public class QuestDataProvider : IPlayerDataProvider<PlayerQuests>
     {
-        public const string TableName = "PlayerData_Quests";
+        public const string TableName = "TraversalData_Quests";
 
         public void CheckSchema(MySQLEntityClient client)
         {

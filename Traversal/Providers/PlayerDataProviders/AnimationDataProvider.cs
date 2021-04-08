@@ -8,7 +8,7 @@ namespace Traversal.Providers.PlayerDataProviders
 {
     public class AnimationDataProvider : IPlayerDataProvider<PlayerAnimator>
     {
-        public const string TableName = "PlayerData_Animation";
+        public const string TableName = "TraversalData_Animation";
 
         public void CheckSchema(MySQLEntityClient client)
         {

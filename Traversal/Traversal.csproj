@@ -173,6 +173,7 @@
     <Compile Include="Models\Proxies\PlayerProxy.cs" />
     <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
     <Compile Include="Models\TraversalConfig.cs" />
+    <Compile Include="Providers\GlobalDataProviders\GlobalQuestProvider.cs" />
     <Compile Include="Providers\PlayerDataProviders\AnimationDataProvider.cs" />
     <Compile Include="Providers\PlayerDataProviders\ClothingPlayerDataProvider.cs" />
     <Compile Include="Providers\PlayerDataProviders\InventoryDataProvider.cs" />
