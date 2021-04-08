@@ -129,7 +129,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\SyncManager.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GlobalDataProviders\GlobalAnimationProvider.cs" />
+    <Compile Include="GlobalDataProviders\GlobalLifeProvider.cs" />
     <Compile Include="Models\Attributes\Disabled.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
     <Compile Include="Models\Attributes\Save.cs" />
@@ -157,11 +160,14 @@
     <Compile Include="Models\Databasing\Scoped\PlayerSkillData.cs" />
     <Compile Include="Models\Exceptions\TraversalBadCastException.cs" />
     <Compile Include="Models\Exceptions\TraversalTargetNotFoundException.cs" />
+    <Compile Include="Models\Scope.cs" />
     <Compile Include="Models\GlobalDataModel.cs" />
+    <Compile Include="Models\IGlobalDataProvider.cs" />
     <Compile Include="Models\IModelProxy.cs" />
     <Compile Include="Models\IPlayerDataProvider.cs" />
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />
+    <Compile Include="Models\PatternConverter.cs" />
     <Compile Include="Models\PlayerDataModel.cs" />
     <Compile Include="Models\Proxies\PlayerProxy.cs" />
     <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
@@ -187,5 +193,6 @@
     <None Include="Libs\UnityEngine.PhysicsModule.dll" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

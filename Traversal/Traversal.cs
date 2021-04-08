@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Linq;
+using HarmonyLib;
 using Rocket.API;
 using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
@@ -13,6 +14,10 @@ namespace Traversal
         public static int ServerID => 0;
         public Harmony HarmonyInstance;
         public MySQLEntityClient Client;
+
+        public static Scope Scope;
+
+        public static bool DoSync => false;
 
         public override void LoadPlugin()
         {
@@ -42,5 +47,8 @@ namespace Traversal
             }
             Client?.Disconnect();
         }
+
+
+
     }
 }
