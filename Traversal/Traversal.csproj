@@ -129,6 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\TraversalReloadCommand.cs" />
     <Compile Include="Core\SyncManager.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Providers\GlobalDataProviders\GlobalAnimationProvider.cs" />

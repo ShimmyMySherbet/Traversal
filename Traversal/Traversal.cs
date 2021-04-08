@@ -17,11 +17,17 @@ namespace Traversal
 
         public static Scope Scope;
 
-        public static bool DoSync => false;
+        public static bool DoSync => Traversal.Instance.Configuration.Instance.EnableSyncing;
+
+        public static Traversal Instance;
+
+
+
 
         public override void LoadPlugin()
         {
             base.LoadPlugin();
+            Instance = this;
             Logger.Log("Loading Traversal...");
             HarmonyInstance = new Harmony(PatchManager.Harmony_ID);
             var c = Configuration.Instance;
@@ -35,6 +41,8 @@ namespace Traversal
                 return;
             }
 
+            MountConfig();
+
             PatchManager.Patch(Client, HarmonyInstance);
         }
 
@@ -46,6 +54,15 @@ namespace Traversal
                 PatchManager.Unpatch(HarmonyInstance);
             }
             Client?.Disconnect();
+        }
+
+        public void MountConfig()
+        {
+            Scope = new Scope();
+            foreach(var scope in Configuration.Instance.Syncs)
+            {
+                Scope.AddVariable(scope);
+            }
         }
 
 

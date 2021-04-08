@@ -1,4 +1,6 @@
-﻿using Rocket.API;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
+using Rocket.API;
 
 namespace Traversal.Models
 {
@@ -11,8 +13,13 @@ namespace Traversal.Models
         public ushort DatabasePort = 3306;
         public int TraversalServerID = 0;
 
+        public bool EnableSyncing = false;
+        [XmlArrayItem(elementName: "Sync")]
+        public List<string> Syncs = new List<string>();
+
         public void LoadDefaults()
         {
+            Syncs = new List<string>() { "Life.*", "Quests.*", "Clothing.*", "Inventory.*", "Skills.*" };
         }
     }
 }
