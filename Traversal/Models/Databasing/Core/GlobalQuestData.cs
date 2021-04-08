@@ -33,8 +33,23 @@ namespace Traversal.Models.Databasing
 
         [SQLPropertyName("Data")] public string FlagValue;
 
-        public void Save() => FlagValue = JsonConvert.SerializeObject(InnerData);
+        public void Save()
+        {
+            if (InnerData  != null)
+            {
+                FlagValue = JsonConvert.SerializeObject(InnerData);
+            }
+        }
 
-        public void Load() => InnerData = JsonConvert.DeserializeObject<InnerQuestData>(FlagValue);
+        public void Load()
+        {
+            if (FlagValue != null)
+            {
+                InnerData = JsonConvert.DeserializeObject<InnerQuestData>(FlagValue);
+            } else
+            {
+                InnerData = new InnerQuestData();
+            }
+        }
     }
 }

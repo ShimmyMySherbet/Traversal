@@ -15,7 +15,7 @@ namespace Traversal.Providers.GlobalDataProviders
         {
             if (!database.TableExists(TableName))
             {
-                database.CreateTable<GlobalClothingProvider>(TableName);
+                database.CreateTable<GlobalClothingData>(TableName);
             }
         }
 

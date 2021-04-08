@@ -21,7 +21,7 @@ namespace Traversal.Core
 
             if (provider == null) return;
 
-            if (!Traversal.Scope[$"{provider.Name}*"])
+            if (!Traversal.Scope[$"{provider.Name}.*"])
             {
                 return;
             }
@@ -58,7 +58,7 @@ namespace Traversal.Core
 
             if (provider == null) return;
 
-            if (!Traversal.Scope[$"{provider.Name}*"])
+            if (!Traversal.Scope[$"{provider.Name}.*"])
             {
                 return;
             }

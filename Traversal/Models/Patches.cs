@@ -1,4 +1,5 @@
-﻿using SDG.Unturned;
+﻿using System.Diagnostics;
+using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Core;
 using Traversal.Models.Attributes;
@@ -9,6 +10,7 @@ namespace Traversal.Models
 {
     public static class Patches
     {
+        public static Stopwatch Stopwatch;
         public static IPlayerDataProvider<T> GetDataProvider<T>()
         {
             return PatchManager.GetDataProvider<T>();
@@ -115,6 +117,8 @@ namespace Traversal.Models
         [Save, Target(typeof(Player), "savePositionAndRotation")]
         public static bool Player_Save(Player __instance)
         {
+            Stopwatch = new Stopwatch();
+            Stopwatch.Start();
             var prov = GetDataProvider<PlayerProxy>();
 
             if (prov == null)
@@ -136,6 +140,9 @@ namespace Traversal.Models
         [Load, Target(typeof(Provider), "loadPlayerSpawn")]
         public static bool Player_Load(SteamPlayerID playerID, out Vector3 point, out byte angle, out EPlayerStance initialStance)
         {
+            Stopwatch = new Stopwatch();
+            Stopwatch.Start();
+
             point = Vector3.zero;
             angle = 0;
             initialStance = EPlayerStance.STAND;
@@ -174,7 +181,13 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return PatchManager.RunPlayerDataProviderSave(prov, __instance);
+            bool r = PatchManager.RunPlayerDataProviderSave(prov, __instance);
+            Stopwatch.Stop();
+
+            UnturnedLog.info("Player Save took {ms}ms, ({t} ticks)", Stopwatch.ElapsedMilliseconds, Stopwatch.ElapsedTicks);
+
+
+            return r;
         }
 
         [Load(typeof(PlayerQuests))]
@@ -186,7 +199,11 @@ namespace Traversal.Models
             {
                 return true;
             }
-            return PatchManager.RunPlayerDataProviderLoad(prov, __instance);
+            var r = PatchManager.RunPlayerDataProviderLoad(prov, __instance);
+            Stopwatch.Stop();
+
+            UnturnedLog.info("Player Load took {ms}ms, ({t} ticks)", Stopwatch.ElapsedMilliseconds, Stopwatch.ElapsedTicks);
+            return r;
         }
 
         [Save(typeof(PlayerSkills))]

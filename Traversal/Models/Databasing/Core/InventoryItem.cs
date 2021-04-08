@@ -9,7 +9,7 @@ namespace Traversal.Models.Databasing
     public class InventoryItem
     {
         public ushort ItemID;
-        public byte[] State;
+        public byte[] State = new byte[0];
         public byte X;
         public byte Y;
         public byte Rot;

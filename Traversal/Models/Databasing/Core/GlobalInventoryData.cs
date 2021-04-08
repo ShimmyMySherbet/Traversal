@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using ShimmyMySherbet.MySQL.EF.Models;
-using Newtonsoft.Json;
 
 namespace Traversal.Models.Databasing
 {
@@ -16,7 +11,22 @@ namespace Traversal.Models.Databasing
         [SQLPropertyName("Content")]
         public string ContentValue;
 
-        public void Load() => Content = JsonConvert.DeserializeObject<InventoryContent>(ContentValue);
-        public void Save() => ContentValue = JsonConvert.SerializeObject(Content);
+        public void Load()
+        {
+            if (ContentValue != null)
+            {
+                Content = JsonConvert.DeserializeObject<InventoryContent>(ContentValue);
+            }
+            else
+            {
+                Content = new InventoryContent();
+            }
+        }
+
+        public void Save()
+        {
+            if (Content != null)
+                ContentValue = JsonConvert.SerializeObject(Content);
+        }
     }
 }

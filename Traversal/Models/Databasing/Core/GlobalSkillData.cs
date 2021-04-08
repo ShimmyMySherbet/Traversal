@@ -15,8 +15,23 @@ namespace Traversal.Models.Databasing
         [SQLPropertyName("Data")]
         public string DataValue;
 
-        public void Load() => Data = JsonConvert.DeserializeObject<InnerSkillData>(DataValue);
+        public void Load()
+        {
+            if (DataValue != null)
+            {
+                Data = JsonConvert.DeserializeObject<InnerSkillData>(DataValue);
+            } else
+            {
+                Data = new InnerSkillData();
+            }
+        }
 
-        public void Save() => DataValue = JsonConvert.SerializeObject(Data);
+        public void Save()
+        {
+            if (Data != null)
+            {
+                DataValue = JsonConvert.SerializeObject(Data);
+            }
+        }
     }
 }
