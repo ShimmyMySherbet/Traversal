@@ -95,6 +95,8 @@ namespace Traversal.Providers.GlobalDataProviders
             if (scope["Life.Temperature"])
                 global.Temperature = data.Temperature;
 
+            database.InsertUpdate(global, TableName);
+
             return true;
         }
     }
