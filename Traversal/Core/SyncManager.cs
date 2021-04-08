@@ -25,8 +25,27 @@ namespace Traversal.Core
             {
                 return;
             }
+            Logger.Log($"Running Global Sync Load of {typeof(T).Name} through {provider.GetType().Name}...");
 
-            provider.Load(ref instance, PatchManager.Client, Traversal.Scope);
+            try
+            {
+                provider.Load(ref instance, PatchManager.Client, Traversal.Scope);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"Failed to load player data from provider: {provider.GetType().Name}");
+                Logger.LogError($"Message: {ex.Message}");
+                Logger.LogError($"StackTrace: {ex.StackTrace}");
+                if (ex.InnerException == null)
+                {
+                    Logger.LogWarning("No inner error.");
+                }
+                else
+                {
+                    Logger.LogError($"Inner: {ex.InnerException.Message}");
+                }
+                Logger.LogWarning($"Falling back on internal load for type {typeof(T).Name}");
+            }
         }
 
 
@@ -43,7 +62,28 @@ namespace Traversal.Core
             {
                 return;
             }
-            provider.Save(instance, PatchManager.Client, Traversal.Scope);
+            Logger.Log($"Running Global Sync Save of {typeof(T).Name} through {provider.GetType().Name}...");
+
+            try
+            {
+                provider.Save(instance, PatchManager.Client, Traversal.Scope);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"Failed to load player data from provider: {provider.GetType().Name}");
+                Logger.LogError($"Message: {ex.Message}");
+                Logger.LogError($"StackTrace: {ex.StackTrace}");
+                if (ex.InnerException == null)
+                {
+                    Logger.LogWarning("No inner error.");
+                }
+                else
+                {
+                    Logger.LogError($"Inner: {ex.InnerException.Message}");
+                }
+                Logger.LogWarning($"Falling back on internal load for type {typeof(T).Name}");
+            }
         }
 
 
