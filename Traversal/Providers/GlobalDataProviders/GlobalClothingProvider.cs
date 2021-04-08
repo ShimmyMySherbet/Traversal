@@ -138,7 +138,7 @@ namespace Traversal.Providers.GlobalDataProviders
                 global.GlassesQuality = data.GlassesQuality;
                 global.GlassesState = data.GlassesState;
             }
-
+            
             database.InsertUpdate(global, TableName);
             return true;
         }

@@ -12,17 +12,27 @@ namespace Traversal.Core
         public static bool IsEnabled = true;
         public static Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
-
         public static void AskSync<T>(ref T instance)
         {
-            if (!Traversal.DoSync) return;
+            Logger.Log($"Running AskSync for type {typeof(T).Name} ");
+
+            if (!Traversal.DoSync)
+            {
+                Logger.Log($"Abort Sync {typeof(T).Name}: Disabled ");
+            };
 
             var provider = GetGlobalProvider<T>();
 
-            if (provider == null) return;
+            if (provider == null)
+            {
+                Logger.Log($"Abort Sync {typeof(T).Name}: No Provider ");
+
+                return;
+            };
 
             if (!Traversal.Scope[$"{provider.Name}.*"])
             {
+                Logger.Log($"Abort Sync {typeof(T).Name}: Not Syncing for this type ");
                 return;
             }
             Logger.Log($"Running Global Sync Load of {typeof(T).Name} through {provider.GetType().Name}...");
@@ -48,10 +58,8 @@ namespace Traversal.Core
             }
         }
 
-
         public static void AskSave<T>(T instance)
         {
-
             if (!Traversal.DoSync) return;
 
             var provider = GetGlobalProvider<T>();
@@ -67,7 +75,6 @@ namespace Traversal.Core
             try
             {
                 provider.Save(instance, PatchManager.Client, Traversal.Scope);
-
             }
             catch (Exception ex)
             {
@@ -85,7 +92,6 @@ namespace Traversal.Core
                 Logger.LogWarning($"Falling back on internal load for type {typeof(T).Name}");
             }
         }
-
 
         public static IGlobalDataProvider<T> GetGlobalProvider<T>()
         {

@@ -86,9 +86,7 @@ namespace Traversal.Providers.GlobalDataProviders
             }
 
             global.Save();
-
-            database.InsertUpdate(data, TableName);
-
+            database.InsertUpdate(global, TableName);
             return true;
         }
     }
