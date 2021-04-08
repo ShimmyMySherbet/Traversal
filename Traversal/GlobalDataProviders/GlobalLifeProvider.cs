@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShimmyMySherbet.MySQL.EF.Core;
+﻿using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -73,8 +68,6 @@ namespace Traversal.GlobalDataProviders
                 };
             }
 
-
-
             if (scope["Life.Health"])
                 global.Health = data.Health;
 
@@ -101,8 +94,6 @@ namespace Traversal.GlobalDataProviders
 
             if (scope["Life.Temperature"])
                 global.Temperature = data.Temperature;
-
-
 
             return true;
         }

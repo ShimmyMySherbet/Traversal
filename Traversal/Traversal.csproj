@@ -132,6 +132,7 @@
     <Compile Include="Core\SyncManager.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalDataProviders\GlobalAnimationProvider.cs" />
+    <Compile Include="GlobalDataProviders\GlobalClothingProvider.cs" />
     <Compile Include="GlobalDataProviders\GlobalLifeProvider.cs" />
     <Compile Include="Models\Attributes\Disabled.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
