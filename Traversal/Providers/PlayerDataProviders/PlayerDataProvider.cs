@@ -7,7 +7,7 @@ using Traversal.Models.Databasing.Scoped;
 using Traversal.Models.Proxies;
 using UnityEngine;
 
-namespace Traversal.PlayerDataProviders
+namespace Traversal.Providers.PlayerDataProviders
 {
     public class PlayerDataProvider : IPlayerDataProvider<PlayerProxy>
     {

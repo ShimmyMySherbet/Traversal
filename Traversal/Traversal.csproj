@@ -131,10 +131,10 @@
   <ItemGroup>
     <Compile Include="Core\SyncManager.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="GlobalDataProviders\GlobalAnimationProvider.cs" />
-    <Compile Include="GlobalDataProviders\GlobalClothingProvider.cs" />
-    <Compile Include="GlobalDataProviders\GlobalInventoryProvider.cs" />
-    <Compile Include="GlobalDataProviders\GlobalLifeProvider.cs" />
+    <Compile Include="Providers\GlobalDataProviders\GlobalAnimationProvider.cs" />
+    <Compile Include="Providers\GlobalDataProviders\GlobalClothingProvider.cs" />
+    <Compile Include="Providers\GlobalDataProviders\GlobalInventoryProvider.cs" />
+    <Compile Include="Providers\GlobalDataProviders\GlobalLifeProvider.cs" />
     <Compile Include="Models\Attributes\Disabled.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
     <Compile Include="Models\Attributes\Save.cs" />
@@ -173,13 +173,13 @@
     <Compile Include="Models\Proxies\PlayerProxy.cs" />
     <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
     <Compile Include="Models\TraversalConfig.cs" />
-    <Compile Include="PlayerDataProviders\AnimationDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\ClothingPlayerDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\InventoryDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\LifeDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\PlayerDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\QuestDataProvider.cs" />
-    <Compile Include="PlayerDataProviders\SkillDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\AnimationDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\ClothingPlayerDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\InventoryDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\LifeDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\PlayerDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\QuestDataProvider.cs" />
+    <Compile Include="Providers\PlayerDataProviders\SkillDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traversal.cs" />
   </ItemGroup>

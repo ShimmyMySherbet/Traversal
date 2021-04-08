@@ -4,7 +4,7 @@ using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
 
-namespace Traversal.GlobalDataProviders
+namespace Traversal.Providers.GlobalDataProviders
 {
     public class GlobalAnimationProvider : IGlobalDataProvider<PlayerAnimationData>
     {

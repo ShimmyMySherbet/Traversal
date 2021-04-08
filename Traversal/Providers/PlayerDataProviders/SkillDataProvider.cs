@@ -30,7 +30,7 @@ namespace Traversal.PlayerDataProviders
 
             instance.SetValue("_experience", data.Experience);
             instance.SetValue("_reputation", data.Reputation);
-            instance.SetValue("_boost", (EPlayerBoost)data.Boost);
+             instance.SetValue("_boost", (EPlayerBoost)data.Boost);
 
             foreach (var skill in data.Data.Skills)
             {
