@@ -26,24 +26,26 @@ namespace Traversal.GlobalDataProviders
             if (global == null) return false;
             global.Load();
 
-            if (scope["Inventory.Primary"])
-            {
-                data.Content.Pages[0] = global.Content.Pages[0];
-            }
-
-            if (scope["Inventory.Secondary"])
-            {
-                data.Content.Pages[1] = global.Content.Pages[1];
-            }
-
-            if (scope["Inventory.Hands"])
-            {
-                data.Content.Pages[2] = global.Content.Pages[2];
-            }
-
             if (scope["Inventory.Content"])
             {
                 data.Content = global.Content;
+            }
+            else
+            {
+                if (scope["Inventory.Primary"])
+                {
+                    data.Content.Pages[0] = global.Content.Pages[0];
+                }
+
+                if (scope["Inventory.Secondary"])
+                {
+                    data.Content.Pages[1] = global.Content.Pages[1];
+                }
+
+                if (scope["Inventory.Hands"])
+                {
+                    data.Content.Pages[2] = global.Content.Pages[2];
+                }
             }
 
             return true;
