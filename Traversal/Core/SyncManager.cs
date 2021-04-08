@@ -9,7 +9,7 @@ namespace Traversal.Core
 {
     public static class SyncManager
     {
-        public static bool IsEnabled;
+        public static bool IsEnabled = true;
         public static Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
 
