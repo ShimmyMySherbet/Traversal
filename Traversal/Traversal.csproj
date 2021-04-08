@@ -133,6 +133,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalDataProviders\GlobalAnimationProvider.cs" />
     <Compile Include="GlobalDataProviders\GlobalClothingProvider.cs" />
+    <Compile Include="GlobalDataProviders\GlobalInventoryProvider.cs" />
     <Compile Include="GlobalDataProviders\GlobalLifeProvider.cs" />
     <Compile Include="Models\Attributes\Disabled.cs" />
     <Compile Include="Models\Attributes\Load.cs" />
@@ -169,7 +170,6 @@
     <Compile Include="Models\Patches.cs" />
     <Compile Include="Core\PatchManager.cs" />
     <Compile Include="Models\PatternConverter.cs" />
-    <Compile Include="Models\PlayerDataModel.cs" />
     <Compile Include="Models\Proxies\PlayerProxy.cs" />
     <Compile Include="Models\Proxies\SpawnProxyResult.cs" />
     <Compile Include="Models\TraversalConfig.cs" />
