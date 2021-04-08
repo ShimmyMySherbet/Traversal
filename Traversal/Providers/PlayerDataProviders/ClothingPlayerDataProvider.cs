@@ -1,6 +1,7 @@
 ﻿using Rocket.Core.Logging;
 using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -27,6 +28,8 @@ namespace Traversal.Providers.PlayerDataProviders
             {
                 return false;
             }
+            SyncManager.AskSync(ref data);
+
 
             var thirdClothes = instance.thirdClothes;
 
@@ -114,6 +117,7 @@ namespace Traversal.Providers.PlayerDataProviders
                 Map = Provider.map
             };
                 database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
 
             return true;
         }

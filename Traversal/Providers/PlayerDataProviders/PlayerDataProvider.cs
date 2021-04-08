@@ -1,6 +1,7 @@
 ﻿using System;
 using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -28,6 +29,7 @@ namespace Traversal.Providers.PlayerDataProviders
         public bool Load(PlayerProxy instance, MySQLEntityClient database)
         {
             PlayerPositionData data = database.QuerySingle<PlayerPositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID, Provider.map);
+            SyncManager.AskSync(ref data);
 
             Vector3 point = Vector3.zero;
             byte angle = 0;
@@ -95,6 +97,7 @@ namespace Traversal.Providers.PlayerDataProviders
                 Map = Provider.map
             };
             database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }

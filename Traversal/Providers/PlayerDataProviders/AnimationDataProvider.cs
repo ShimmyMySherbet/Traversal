@@ -1,5 +1,6 @@
 ﻿using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -27,6 +28,8 @@ namespace Traversal.Providers.PlayerDataProviders
                 return true;
             }
 
+            SyncManager.AskSync(ref data);
+
             instance.SetValue("_gesture", (EPlayerGesture)data.Gesture);
             instance.captorID = new Steamworks.CSteamID(data.ArresterID);
             instance.captorItem = data.HandcuffID;
@@ -50,6 +53,7 @@ namespace Traversal.Providers.PlayerDataProviders
                 Map = Provider.map
             };
             database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -27,10 +28,11 @@ namespace Traversal.PlayerDataProviders
                 return false;
             }
             data.Load();
+            SyncManager.AskSync(ref data);
 
             instance.SetValue("_experience", data.Experience);
             instance.SetValue("_reputation", data.Reputation);
-             instance.SetValue("_boost", (EPlayerBoost)data.Boost);
+            instance.SetValue("_boost", (EPlayerBoost)data.Boost);
 
             foreach (var skill in data.Data.Skills)
             {
@@ -67,6 +69,7 @@ namespace Traversal.PlayerDataProviders
             data.Save();
 
             database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }

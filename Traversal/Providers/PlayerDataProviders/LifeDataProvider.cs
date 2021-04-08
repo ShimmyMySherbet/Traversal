@@ -1,5 +1,6 @@
 ﻿using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -26,6 +27,7 @@ namespace Traversal.Providers.PlayerDataProviders
             {
                 return false;
             }
+            SyncManager.AskSync(ref data);
 
             instance.SetValue("_health", data.Health);
             instance.SetValue("_food", data.Food);
@@ -61,6 +63,7 @@ namespace Traversal.Providers.PlayerDataProviders
                 Map = Provider.map
             };
             database.InsertUpdate(life, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }

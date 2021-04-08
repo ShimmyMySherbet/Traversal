@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -27,6 +28,8 @@ namespace Traversal.Providers.PlayerDataProviders
                 return false;
             }
             data.Load();
+            SyncManager.AskSync(ref data);
+
             Items[] items = instance.items;
             var loadPages = data.Content.Pages;
             for (byte page = 0; page < 7; page++)
@@ -88,6 +91,7 @@ namespace Traversal.Providers.PlayerDataProviders
             }
             data.Save();
             database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }

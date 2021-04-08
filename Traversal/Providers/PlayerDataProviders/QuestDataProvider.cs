@@ -3,6 +3,7 @@ using System.Linq;
 using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Steamworks;
+using Traversal.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
 using Traversal.Models.Databasing.Scoped;
@@ -31,6 +32,7 @@ namespace Traversal.PlayerDataProviders
                 return false;
             }
             data.Load();
+            SyncManager.AskSync(ref data);
 
             bool placed = data.MarkerX != 0 || data.MarkerY != 0 || data.MarkerZ != 0;
             Vector3 pos = new Vector3(data.MarkerX, data.MarkerY, data.MarkerZ);
@@ -98,6 +100,7 @@ namespace Traversal.PlayerDataProviders
 
             data.Save();
             database.InsertUpdate(data, TableName);
+            SyncManager.AskSave(data);
             return true;
         }
     }
