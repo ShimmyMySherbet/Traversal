@@ -20,7 +20,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerClothing instance, MySQLEntityClient database)
         {
-            ClothingData data = database.QuerySingle<ClothingData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            ClothingData data = database.QuerySingle<ClothingData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -109,7 +109,8 @@ namespace Traversal.PlayerDataProviders
                 ShirtState = instance.shirtState,
                 Slot = instance.channel.GetPlayerSlotID(),
                 VestQuality = instance.vestQuality,
-                VestState = instance.vestState
+                VestState = instance.vestState,
+                Map = Provider.map
             };
                 database.InsertUpdate(data, TableName);
 

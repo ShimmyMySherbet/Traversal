@@ -19,7 +19,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerLife instance, MySQLEntityClient database)
         {
-            LifeData data = database.QuerySingle<LifeData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            LifeData data = database.QuerySingle<LifeData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -56,7 +56,8 @@ namespace Traversal.PlayerDataProviders
                 Stamina = instance.stamina,
                 Temperature = (byte)instance.temperature,
                 Virus = instance.virus,
-                Water = instance.water
+                Water = instance.water,
+                Map = Provider.map
             };
             database.InsertUpdate(life, TableName);
             return true;

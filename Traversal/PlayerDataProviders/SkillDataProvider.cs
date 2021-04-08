@@ -19,7 +19,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerSkills instance, MySQLEntityClient database)
         {
-            SkillData data = database.QuerySingle<SkillData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            SkillData data = database.QuerySingle<SkillData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -52,7 +52,8 @@ namespace Traversal.PlayerDataProviders
                 ServerID = Traversal.ServerID,
                 Boost = (byte)instance.boost,
                 Experience = instance.experience,
-                Reputation = instance.reputation
+                Reputation = instance.reputation,
+                Map = Provider.map
             };
             data.Data = new InnerSkillData();
 

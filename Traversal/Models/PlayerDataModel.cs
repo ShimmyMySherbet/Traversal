@@ -10,5 +10,7 @@ namespace Traversal.Models
         public byte Slot;
 
         public int ServerID;
+
+        public string Map;
     }
 }

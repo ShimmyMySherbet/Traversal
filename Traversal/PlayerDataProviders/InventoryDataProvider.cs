@@ -20,7 +20,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerInventory instance, MySQLEntityClient database)
         {
-            InventoryData data = database.QuerySingle<InventoryData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            InventoryData data = database.QuerySingle<InventoryData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
             if (data == null)
             {
                 return false;
@@ -54,7 +54,8 @@ namespace Traversal.PlayerDataProviders
                 PlayerID = instance.channel.GetPlayerID(),
                 ServerID = Traversal.ServerID,
                 Slot = instance.channel.GetPlayerSlotID(),
-                Content = new InventoryContent()
+                Content = new InventoryContent(),
+                Map = Provider.map
             };
 
             for (byte page = 0; page < 7; page++)

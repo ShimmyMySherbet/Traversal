@@ -19,7 +19,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerAnimator instance, MySQLEntityClient database)
         {
-            AnimationData data = database.QuerySingle<AnimationData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            AnimationData data = database.QuerySingle<AnimationData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -45,7 +45,8 @@ namespace Traversal.PlayerDataProviders
                 Gesture = (byte)instance.gesture,
                 HandcuffID = instance.captorItem,
                 HandcuffStrength = instance.captorStrength,
-                Slot = instance.channel.GetPlayerSlotID()
+                Slot = instance.channel.GetPlayerSlotID(),
+                Map = Provider.map
             };
             database.InsertUpdate(data, TableName);
             return true;

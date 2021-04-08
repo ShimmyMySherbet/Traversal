@@ -26,7 +26,7 @@ namespace Traversal.PlayerDataProviders
         /// </summary>
         public bool Load(PlayerProxy instance, MySQLEntityClient database)
         {
-            PositionData data = database.QuerySingle<PositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID);
+            PositionData data = database.QuerySingle<PositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID, Provider.map);
 
             Vector3 point = Vector3.zero;
             byte angle = 0;
@@ -90,7 +90,8 @@ namespace Traversal.PlayerDataProviders
                 X = instance.Player.transform.position.x,
                 Y = instance.Player.transform.position.y,
                 Z = instance.Player.transform.position.z,
-                Stance = (byte)instance.Player.stance.stance
+                Stance = (byte)instance.Player.stance.stance,
+                Map = Provider.map
             };
             database.InsertUpdate(data, TableName);
             return true;

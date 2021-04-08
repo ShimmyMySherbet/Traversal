@@ -23,7 +23,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Load(PlayerQuests instance, MySQLEntityClient database)
         {
-            QuestData data = database.QuerySingle<QuestData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID);
+            QuestData data = database.QuerySingle<QuestData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -83,7 +83,8 @@ namespace Traversal.PlayerDataProviders
                 MarkerX = instance.markerPosition.x,
                 MarkerY = instance.markerPosition.y,
                 MarkerZ = instance.markerPosition.z,
-                RadioFrequency = instance.radioFrequency
+                RadioFrequency = instance.radioFrequency,
+                Map = Provider.map
             };
             var quests = instance.GetValue<List<PlayerQuest>>("questsList");
             var flags = instance.GetValue<List<PlayerQuestFlag>>("flagsList");
