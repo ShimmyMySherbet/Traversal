@@ -7,7 +7,7 @@ namespace Traversal.Providers.GlobalDataProviders
 {
     public class GlobalLifeProvider : IGlobalDataProvider<PlayerLifeData>
     {
-        public const string TableName = "PlayerData_Life_Global";
+        public const string TableName = "TraversalData_Life_Global";
         public string Name => "Life";
 
         public void CheckSchema(MySQLEntityClient database)
