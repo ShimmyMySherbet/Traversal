@@ -46,7 +46,7 @@ namespace Traversal.Providers.PlayerDataProviders
 
         public bool Save(PlayerLife instance, MySQLEntityClient database)
         {
-            PlayerLifeData life = new PlayerLifeData()
+            PlayerLifeData data = new PlayerLifeData()
             {
                 PlayerID = instance.channel.GetPlayerID(),
                 ServerID = Traversal.ServerID,
@@ -62,7 +62,7 @@ namespace Traversal.Providers.PlayerDataProviders
                 Water = instance.water,
                 Map = Provider.map
             };
-            database.InsertUpdate(life, TableName);
+            database.InsertUpdate(data, TableName);
             SyncManager.AskSave(data);
             return true;
         }
