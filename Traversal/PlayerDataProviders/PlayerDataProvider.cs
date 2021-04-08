@@ -17,7 +17,7 @@ namespace Traversal.PlayerDataProviders
         {
             if (!client.TableExists(TableName))
             {
-                client.CreateTable<PositionData>(TableName);
+                client.CreateTable<PlayerPositionData>(TableName);
             }
         }
 
