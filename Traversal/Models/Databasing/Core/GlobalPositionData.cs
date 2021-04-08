@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Traversal.Models.Databasing
 {
-    public class PositionData : PlayerDataModel
+    public class GlobalPositionData : GlobalDataModel
     {
         public bool IsDead;
         public float X;

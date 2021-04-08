@@ -5,6 +5,7 @@ using ShimmyMySherbet.MySQL.EF.Core;
 using Steamworks;
 using Traversal.Models;
 using Traversal.Models.Databasing;
+using Traversal.Models.Databasing.Scoped;
 using UnityEngine;
 
 namespace Traversal.PlayerDataProviders
@@ -17,13 +18,13 @@ namespace Traversal.PlayerDataProviders
         {
             if (!client.TableExists(TableName))
             {
-                client.CreateTable<QuestData>(TableName);
+                client.CreateTable<PlayerQuestData>(TableName);
             }
         }
 
         public bool Load(PlayerQuests instance, MySQLEntityClient database)
         {
-            QuestData data = database.QuerySingle<QuestData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
+            PlayerQuestData data = database.QuerySingle<PlayerQuestData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -71,7 +72,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Save(PlayerQuests instance, MySQLEntityClient database)
         {
-            QuestData data = new QuestData()
+            PlayerQuestData data = new PlayerQuestData()
             {
                 GroupID = instance.groupID.m_SteamID,
                 PlayerID = instance.channel.GetPlayerID(),

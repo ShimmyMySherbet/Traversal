@@ -4,7 +4,7 @@ using ShimmyMySherbet.MySQL.EF.Models;
 
 namespace Traversal.Models.Databasing
 {
-    public class QuestData : PlayerDataModel
+    public class GlobalQuestData : GlobalDataModel
     {
         public float MarkerX;
         public float MarkerY;

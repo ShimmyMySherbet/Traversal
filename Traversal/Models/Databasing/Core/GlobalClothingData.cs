@@ -1,6 +1,6 @@
 ﻿namespace Traversal.Models.Databasing
 {
-    public class ClothingData : PlayerDataModel
+    public class GlobalClothingData : GlobalDataModel
     {
         public bool isVisible;
         public bool isSkinned;

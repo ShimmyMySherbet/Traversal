@@ -7,7 +7,7 @@ using ShimmyMySherbet.MySQL.EF;
 
 namespace Traversal.Models.Databasing
 {
-    public class AnimationData : PlayerDataModel
+    public class GlobalAnimationData : GlobalDataModel
     {
         public byte Gesture;
         public ulong ArresterID;

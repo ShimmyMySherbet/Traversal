@@ -3,6 +3,7 @@ using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
+using Traversal.Models.Databasing.Scoped;
 using Traversal.Models.Proxies;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace Traversal.PlayerDataProviders
         /// </summary>
         public bool Load(PlayerProxy instance, MySQLEntityClient database)
         {
-            PositionData data = database.QuerySingle<PositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID, Provider.map);
+            PlayerPositionData data = database.QuerySingle<PlayerPositionData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.PlayerID, instance.PlayerSlot, Traversal.ServerID, Provider.map);
 
             Vector3 point = Vector3.zero;
             byte angle = 0;
@@ -80,7 +81,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Save(PlayerProxy instance, MySQLEntityClient database)
         {
-            PositionData data = new PositionData()
+            PlayerPositionData data = new PlayerPositionData()
             {
                 IsDead = instance.Player.life.isDead,
                 PlayerID = instance.PlayerID,

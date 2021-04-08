@@ -1,16 +1,12 @@
-﻿using ShimmyMySherbet.MySQL.EF.Models;
+﻿//using ShimmyMySherbet.MySQL.EF.Models;
 
-namespace Traversal.Models
-{
-    public abstract class PlayerDataModel
-    {
-        [SQLPrimaryKey]
-        public ulong PlayerID;
+//namespace Traversal.Models
+//{
+//    public abstract class PlayerDataModel : GlobalDataModel
+//    {
+//        [SQLPrimaryKey]
+//        public ulong PlayerID;
 
-        public byte Slot;
-
-        public int ServerID;
-
-        public string Map;
-    }
-}
+//        public byte Slot;
+//    }
+//}

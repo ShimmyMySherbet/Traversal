@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Traversal.Models.Databasing
 {
-    public class InventoryData : PlayerDataModel
+    public class GlobalInventoryData : GlobalDataModel
     {
         [SQLIgnore]
         public InventoryContent Content;

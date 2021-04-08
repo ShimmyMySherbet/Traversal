@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Traversal.Models.Databasing
 {
-    public class LifeData : PlayerDataModel
+    public class GlobalLifeData : GlobalDataModel
     {
         public byte Health;
         public byte Food;

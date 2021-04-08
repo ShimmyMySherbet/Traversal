@@ -3,6 +3,7 @@ using SDG.Unturned;
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
+using Traversal.Models.Databasing.Scoped;
 
 namespace Traversal.PlayerDataProviders
 {
@@ -14,13 +15,13 @@ namespace Traversal.PlayerDataProviders
         {
             if (!client.TableExists(TableName))
             {
-                client.CreateTable<ClothingData>(TableName);
+                client.CreateTable<PlayerClothingData>(TableName);
             }
         }
 
         public bool Load(PlayerClothing instance, MySQLEntityClient database)
         {
-            ClothingData data = database.QuerySingle<ClothingData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
+            PlayerClothingData data = database.QuerySingle<PlayerClothingData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -81,7 +82,7 @@ namespace Traversal.PlayerDataProviders
         public bool Save(PlayerClothing instance, MySQLEntityClient database)
         {
             var thirdClothes = instance.thirdClothes;
-            ClothingData data = new ClothingData()
+            PlayerClothingData data = new PlayerClothingData()
             {
                 BackpackID = thirdClothes.backpack,
                 GlassesID = thirdClothes.glasses,

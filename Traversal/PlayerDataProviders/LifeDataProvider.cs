@@ -2,6 +2,7 @@
 using ShimmyMySherbet.MySQL.EF.Core;
 using Traversal.Models;
 using Traversal.Models.Databasing;
+using Traversal.Models.Databasing.Scoped;
 
 namespace Traversal.PlayerDataProviders
 {
@@ -13,13 +14,13 @@ namespace Traversal.PlayerDataProviders
         {
             if (!client.TableExists(TableName))
             {
-                client.CreateTable<LifeData>(TableName);
+                client.CreateTable<PlayerLifeData>(TableName);
             }
         }
 
         public bool Load(PlayerLife instance, MySQLEntityClient database)
         {
-            LifeData data = database.QuerySingle<LifeData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
+            PlayerLifeData data = database.QuerySingle<PlayerLifeData>($"SELECT * FROM `{TableName}` WHERE PlayerID=@0 AND Slot=@1 AND ServerID=@2 AND Map=@3", instance.channel.GetPlayerID(), instance.channel.GetPlayerSlotID(), Traversal.ServerID, Provider.map);
 
             if (data == null)
             {
@@ -43,7 +44,7 @@ namespace Traversal.PlayerDataProviders
 
         public bool Save(PlayerLife instance, MySQLEntityClient database)
         {
-            LifeData life = new LifeData()
+            PlayerLifeData life = new PlayerLifeData()
             {
                 PlayerID = instance.channel.GetPlayerID(),
                 ServerID = Traversal.ServerID,

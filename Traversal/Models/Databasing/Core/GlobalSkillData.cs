@@ -3,7 +3,7 @@ using ShimmyMySherbet.MySQL.EF.Models;
 
 namespace Traversal.Models.Databasing
 {
-    public class SkillData : PlayerDataModel
+    public class GlobalSkillData : GlobalDataModel
     {
         public uint Experience;
         public int Reputation;
